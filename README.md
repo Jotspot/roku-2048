@@ -2,7 +2,7 @@
 
 The classic 2048 puzzle as a Roku app. Slide the tiles with your remote, merge matching numbers, try to hit 2048.
 
-> **Coming to the Roku Channel Store worldwide on Monday, September 28, 2026 at 10 AM PT.** It's free.
+> **Available on the Roku Channel Store worldwide starting Monday, September 28, 2026 at 10 AM PT.** It's free.
 
 ![2048 running on a Roku](store/screenshots/01_hero.png)
 
