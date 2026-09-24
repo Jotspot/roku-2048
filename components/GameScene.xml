@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Structure only: every size and position is computed in GameScene.brs
+     layout() for the active UI resolution (HD 1280x720 or FHD 1920x1080), in
+     whole pixels, so text and edges stay crisp on every TV. -->
+<component name="GameScene" extends="Scene">
+  <script type="text/brightscript" uri="GameScene.brs" />
+  <script type="text/brightscript" uri="colors.brs" />
+
+  <children>
+    <Poster id="bgGrad" uri="pkg:/images/bg.png" />
+
+    <Group id="boardGroup">
+      <Poster id="boardShadow" uri="pkg:/images/glow.9.png" blendColor="0x776E65FF" opacity="0.22" />
+      <Poster id="boardBg" blendColor="0xBBADA0FF" />
+      <Group id="cells" />
+      <Group id="tileLayer" />
+      <!-- merge burst rings draw above every tile so neighbours never cover them -->
+      <Group id="fxLayer" />
+      <Poster id="flash" blendColor="0xFFFFFFFF" opacity="0" />
+    </Group>
+
+    <Group id="panel" />
+    <Group id="scoreBox" />
+    <Group id="bestBox" />
+    <Label id="plusLbl" horizAlign="center" vertAlign="center" color="0x776E65FF" opacity="0" />
+    <Group id="overlayHost" />
+
+    <Animation id="plusAnim" duration="0.6" easeFunction="outCubic">
+      <Vector2DFieldInterpolator id="plusMove" key="[0.0, 1.0]" fieldToInterp="plusLbl.translation" />
+      <FloatFieldInterpolator key="[0.0, 0.4, 1.0]" keyValue="[1.0, 0.9, 0.0]" fieldToInterp="plusLbl.opacity" />
+    </Animation>
+
+    <Animation id="scoreBump" duration="0.22" easeFunction="linear">
+      <Vector2DFieldInterpolator key="[0.0, 0.3, 0.65, 1.0]" keyValue="[[1,1],[1.08,1.08],[0.98,0.98],[1,1]]" fieldToInterp="scoreBox.scale" />
+    </Animation>
+
+    <Animation id="bestBump" duration="0.22" easeFunction="linear">
+      <Vector2DFieldInterpolator key="[0.0, 0.3, 0.65, 1.0]" keyValue="[[1,1],[1.08,1.08],[0.98,0.98],[1,1]]" fieldToInterp="bestBox.scale" />
+    </Animation>
+
+    <Animation id="nudgeAnim" duration="0.16" easeFunction="linear">
+      <Vector2DFieldInterpolator id="nudgeInterp" key="[0.0, 0.2, 0.55, 0.8, 1.0]" fieldToInterp="boardGroup.translation" />
+    </Animation>
+
+    <Animation id="flashAnim" duration="0.5" easeFunction="outQuad">
+      <FloatFieldInterpolator key="[0.0, 1.0]" keyValue="[0.6, 0.0]" fieldToInterp="flash.opacity" />
+    </Animation>
+
+    <Timer id="delayTimer" duration="0.35" repeat="false" />
+    <Timer id="initTimer" duration="0.05" repeat="false" />
+  </children>
+</component>

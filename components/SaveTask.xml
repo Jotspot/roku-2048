@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Persists the game to the registry on its own thread. The scene sets `data`
+     (a JSON snapshot) after every move; flash writes never touch the render
+     thread, and there is no dependency on main-thread timing. -->
+<component name="SaveTask" extends="Task">
+  <interface>
+    <field id="data" type="string" alwaysNotify="true" />
+  </interface>
+  <script type="text/brightscript" uri="SaveTask.brs" />
+</component>

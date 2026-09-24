@@ -1,0 +1,10 @@
+# build output: also where the Roku signing key lives. Never commit it.
+out/
+*.pkg
+SIGNING-KEY*
+
+# generated / local
+tools/promo/build/
+site/.wrangler/
+node_modules/
+.DS_Store

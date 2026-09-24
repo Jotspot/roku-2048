@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Board-sized modal placed over the board: win / game over / confirm.
+     Laid out in init() from m.global.layout so it is pixel-exact at HD and FHD.
+     "card" sits at the board centre with content offset, so it scales from the middle. -->
+<component name="Overlay" extends="Group">
+  <interface>
+    <function name="present" />
+    <function name="dismiss" />
+  </interface>
+
+  <script type="text/brightscript" uri="Overlay.brs" />
+
+  <children>
+    <Poster id="dim" opacity="0" />
+    <Group id="card" opacity="0">
+      <Group id="cardBody">
+        <Label id="title" horizAlign="center" vertAlign="center" />
+        <Label id="sub" horizAlign="center" vertAlign="center" />
+        <Group id="chip1">
+          <Poster id="chip1Bg" blendColor="0x8F7A66FF" />
+          <Label id="chip1Key" horizAlign="center" vertAlign="center" color="0xF9F6F2A0" />
+          <Poster id="chip1Icon" blendColor="0xF9F6F2C0" />
+          <Label id="chip1Act" horizAlign="center" vertAlign="center" color="0xF9F6F2FF" />
+        </Group>
+        <Group id="chip2">
+          <Poster id="chip2Bg" blendColor="0x8F7A66FF" />
+          <Label id="chip2Key" horizAlign="center" vertAlign="center" color="0xF9F6F2A0" />
+          <Poster id="chip2Icon" blendColor="0xF9F6F2C0" />
+          <Label id="chip2Act" horizAlign="center" vertAlign="center" color="0xF9F6F2FF" />
+        </Group>
+      </Group>
+    </Group>
+
+    <Animation id="inAnim" duration="0.25" easeFunction="linear">
+      <FloatFieldInterpolator id="dimIn" fieldToInterp="dim.opacity" />
+      <FloatFieldInterpolator id="cardFade" fieldToInterp="card.opacity" />
+      <Vector2DFieldInterpolator id="cardScale" fieldToInterp="card.scale" />
+    </Animation>
+
+    <Animation id="outAnim" duration="0.14" easeFunction="inQuad">
+      <FloatFieldInterpolator id="dimOut" key="[0.0, 1.0]" keyValue="[0.75, 0.0]" fieldToInterp="dim.opacity" />
+      <FloatFieldInterpolator id="cardOut" key="[0.0, 1.0]" keyValue="[1.0, 0.0]" fieldToInterp="card.opacity" />
+    </Animation>
+  </children>
+</component>

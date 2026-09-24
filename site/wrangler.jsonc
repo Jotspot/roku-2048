@@ -1,0 +1,12 @@
+// Static site for https://2048.mistr.uk (privacy, terms, support, landing page).
+// Build pages with `python3 build.py`, deploy with `npx wrangler deploy`.
+{
+  "name": "roku-2048-site",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./public",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [{ "pattern": "2048.mistr.uk", "custom_domain": true }]
+}

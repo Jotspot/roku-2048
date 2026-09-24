@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- One pooled tile.
+     "mover" sits at the tile's CENTRE; the art inside "popper" is offset by
+     -size/2, so scaling popper grows/shrinks around the middle on every
+     renderer (no reliance on scaleRotateCenter).
+     All animations are linear over precomputed keyframes (ease-out for slides,
+     overshoot for the merge pop), so the curves are identical on every renderer. -->
+<component name="Tile" extends="Group">
+  <interface>
+    <function name="spawn" />
+    <function name="slide" />
+    <function name="finish" />
+    <function name="hide" />
+  </interface>
+
+  <script type="text/brightscript" uri="Tile.brs" />
+  <script type="text/brightscript" uri="colors.brs" />
+
+  <children>
+    <Group id="mover">
+      <Group id="popper">
+        <!-- warm glow behind 128+ tiles, stronger for each doubling -->
+        <Poster id="glow" uri="pkg:/images/glow.9.png" visible="false" />
+        <Poster id="bg" />
+        <Label id="lbl" horizAlign="center" vertAlign="center" />
+      </Group>
+    </Group>
+
+    <Animation id="moveAnim" duration="0.1" easeFunction="linear">
+      <Vector2DFieldInterpolator id="moveInterp" fieldToInterp="mover.translation" />
+    </Animation>
+
+    <Animation id="shrinkAnim" duration="0.1" easeFunction="linear">
+      <Vector2DFieldInterpolator id="shrinkInterp" fieldToInterp="popper.scale" />
+    </Animation>
+
+    <Animation id="popAnim" duration="0.15" easeFunction="linear">
+      <Vector2DFieldInterpolator id="popInterp" fieldToInterp="popper.scale" />
+      <FloatFieldInterpolator id="popFade" fieldToInterp="popper.opacity" />
+    </Animation>
+  </children>
+</component>
