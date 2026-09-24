@@ -8,3 +8,6 @@ tools/promo/build/
 site/.wrangler/
 node_modules/
 .DS_Store
+
+# local notes for Claude Code
+CLAUDE.md
